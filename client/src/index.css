@@ -1,0 +1,246 @@
+/*
+ * DESIGN PHILOSOPHY: Artisan Warmth — Arts & Crafts Revival meets modern boutique studio
+ * Colors: Warm ivory bg (#FAF6F0), espresso text (#2B1A0F), dusty rose-gold accent (#C4956A)
+ * Typography: Playfair Display (serif display) + DM Sans (clean body)
+ * Layout: Asymmetric editorial, diagonal dividers, staggered grids
+ * Motifs: Thin rule + scissors divider, fabric texture, oversized italic pull-quotes
+ */
+
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+}
+
+:root {
+  --radius: 0.375rem;
+
+  /* Artisan Warmth Palette */
+  --background: oklch(0.98 0.012 75);        /* warm ivory #FAF6F0 */
+  --foreground: oklch(0.18 0.04 55);         /* deep espresso #2B1A0F */
+  --card: oklch(1 0.008 75);                 /* near white with warmth */
+  --card-foreground: oklch(0.18 0.04 55);
+  --popover: oklch(1 0.008 75);
+  --popover-foreground: oklch(0.18 0.04 55);
+
+  /* Primary: dusty rose-gold */
+  --primary: oklch(0.62 0.09 55);            /* #C4956A */
+  --primary-foreground: oklch(0.99 0.005 75);
+
+  /* Secondary: warm cream */
+  --secondary: oklch(0.94 0.018 75);
+  --secondary-foreground: oklch(0.28 0.04 55);
+
+  /* Muted: soft warm grey */
+  --muted: oklch(0.93 0.012 75);
+  --muted-foreground: oklch(0.48 0.025 60);
+
+  /* Accent: same as primary for consistency */
+  --accent: oklch(0.94 0.018 75);
+  --accent-foreground: oklch(0.18 0.04 55);
+
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.985 0 0);
+
+  --border: oklch(0.88 0.018 70);
+  --input: oklch(0.88 0.018 70);
+  --ring: oklch(0.62 0.09 55);
+
+  /* Custom brand tokens */
+  --brand-espresso: oklch(0.18 0.04 55);
+  --brand-gold: oklch(0.62 0.09 55);
+  --brand-gold-light: oklch(0.78 0.07 65);
+  --brand-ivory: oklch(0.98 0.012 75);
+  --brand-cream: oklch(0.95 0.018 75);
+  --brand-warm-grey: oklch(0.55 0.02 60);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, h4, h5 {
+    font-family: 'Playfair Display', serif;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+  }
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]),
+  [type="button"]:not(:disabled),
+  [type="submit"]:not(:disabled),
+  a[href],
+  select:not(:disabled) {
+    @apply cursor-pointer;
+  }
+}
+
+@layer components {
+  .container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+
+  .flex {
+    min-height: 0;
+    min-width: 0;
+  }
+
+  @media (min-width: 640px) {
+    .container {
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .container {
+      padding-left: 3rem;
+      padding-right: 3rem;
+      max-width: 1320px;
+    }
+  }
+
+  /* Brand button styles */
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--brand-espresso);
+    color: var(--brand-ivory);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+    font-size: 0.9375rem;
+    letter-spacing: 0.03em;
+    padding: 0.875rem 2rem;
+    border-radius: 2px;
+    border: none;
+    transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .btn-primary:hover {
+    background: oklch(0.25 0.04 55);
+    transform: translateX(2px);
+    box-shadow: 4px 4px 0px var(--brand-gold);
+  }
+
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: transparent;
+    color: var(--brand-espresso);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+    font-size: 0.9375rem;
+    letter-spacing: 0.03em;
+    padding: 0.875rem 2rem;
+    border-radius: 2px;
+    border: 2px solid var(--brand-espresso);
+    transition: background 0.2s ease, color 0.2s ease, transform 0.15s ease;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .btn-outline:hover {
+    background: var(--brand-espresso);
+    color: var(--brand-ivory);
+    transform: translateX(2px);
+  }
+
+  /* Section divider with scissors motif */
+  .section-divider {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  .section-divider::before {
+    content: '';
+    flex: 0 0 3rem;
+    height: 1px;
+    background: var(--brand-gold);
+  }
+  .section-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--brand-gold);
+  }
+
+  /* Scroll reveal animation */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Grain texture overlay */
+  .grain-overlay {
+    position: relative;
+  }
+  .grain-overlay::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    opacity: 0.4;
+  }
+}
+
+/* Pulse animation for CTA */
+@keyframes gentle-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 oklch(0.62 0.09 55 / 0.4); }
+  50% { box-shadow: 0 0 0 8px oklch(0.62 0.09 55 / 0); }
+}
+
+.cta-pulse {
+  animation: gentle-pulse 3s ease-in-out infinite;
+}
+
+/* Stagger animation delays */
+.delay-100 { transition-delay: 100ms; }
+.delay-200 { transition-delay: 200ms; }
+.delay-300 { transition-delay: 300ms; }
+.delay-400 { transition-delay: 400ms; }
