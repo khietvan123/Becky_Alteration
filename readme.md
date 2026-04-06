@@ -32,5 +32,5 @@ The website is designed to showcase services, build trust through reviews, and c
 Clone the repository:
 
 ```bash
-git clone https://github.com/your-username/becky-alteration-website.git
+git clone https://github.com/khietvan123/becky-alteration-website.git
 cd becky-alteration-website
